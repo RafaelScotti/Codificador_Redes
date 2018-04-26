@@ -62,28 +62,24 @@ ultimoSinal="0"
 penultimoSinal="-1"
 if(tecnica=="mlt3"):
     for n in convertBin:
-        if(n=="+1"):
-            if(ultimoSinal=="0"):
-                if(penultimoSinal=="-1"):    
-                    daMLT3 = saidaMLT3 + "+1"
-                    ultimoSinal = ultimoSinal
-                    ultimoSinal = "+1"
-            elif(penultimoSinal=="1"):
-                saidaMLT3 = saidaMLT3 + "-1"
-                penultimoSinal = ultimoSinal
-                ultimoSinal = "-1"
-        elif(ultimoSinal=="1"):
-            if(penultimoSinal=="+1"):
-                saidaMLT3 = saidaMLT3+"0"
-                penultimoSinal="+1"
-                ultimoSinal= "0"
-            elif(penultimoSinal=="-1"):
-                saidaMLT3 = saidaMLT3+"0"
-                penultimoSinal="-1"
-                ultimoSinal= "0"
- 
-    else:
-        saidaMLT3 = saidaMLT3 + ultimoSinal
+        if(n=="1" and penultimoSinal=="-1" and ultimoSinal=="0"):
+            saidaMLT3=saidaMLT3 + "+1"
+            penultimoSinal = ultimoSinal
+            ultimoSinal="+1"
+        elif(n=="1" and penultimoSinal=="0" and ultimoSinal=="+1"):
+            saidaMLT3  += "0"
+            penultimoSinal = ultimoSinal
+            ultimoSinal = "0"
+        elif(n=="1" and penultimoSinal=="0" and ultimoSinal=="-1"):
+            saidaMLT3+="0"
+            penultimoSinal = ultimoSinal
+            ultimoSinal = "0"
+        elif(n=="1" and penultimoSinal=="+1" and ultimoSinal=="0"):
+            saidaMLT3+="-1"
+            penultimoSinal = ultimoSinal
+            ultimoSinal="-1"
+        elif(n=="0"):
+            saidaMLT3+=ultimoSinal
 
 print(saidaMLT3)
 #APAGAR TUDO
