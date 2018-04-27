@@ -4,19 +4,15 @@ tecnica = ""
 valorHexa = ""
 
 if(len(sys.argv)==3):
-    if(sys.argv[1]=="nrzi" or sys.argv[1]=="manch" or sys.argv[1]=="mlt3" or sys.argv[1]=="8b10b"):
-        tecnica = sys.argv[1]
-    else:
-        print("Técnica de codificacao invalida")
-        sys.exit()
+    tecnica = sys.argv[1]
     valorHexa = sys.argv[2]
     if(all(c in string.hexdigits for c in valorHexa)):
         print("OK")
     else:
-        print("Codigo hexadecimal invalido!")
+        print("Erro: Codigo hexadecimal invalido!")
         sys.exit()
 else:
-    print("Vc deve digitar dois argumentos <tecnica codificacao> <valor hexa>")
+    print("Erro: Vc deve digitar dois argumentos <tecnica codificacao> <valor hexa>")
     sys.exit()
 
 t = len(valorHexa)*4 #verifica total de bits
@@ -42,7 +38,7 @@ def nrzi(convertBin):
 
     print(saidaNRZI)
 
-#UNCAO MANCH
+#FUNCAO MANCH
 def manch(convertBin):
     saidaMANCH=""
     if(tecnica=="manch"):
@@ -94,3 +90,8 @@ elif(tecnica=="manch"):
     manch(convertBin)
 elif(tecnica=="mlt3"):
     mlt3(convertBin)
+elif(tecnica=="8b10b"):
+    t8b10b(convertBin)
+else:
+    print("Erro: Tecnica invalida")
+    sys.exit()
