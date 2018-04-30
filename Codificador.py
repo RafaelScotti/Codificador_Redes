@@ -73,7 +73,7 @@ if(len(sys.argv)==3):
     tecnica = sys.argv[1]
     valorHexa = sys.argv[2]
     if(all(c in string.hexdigits for c in valorHexa)):
-        print("OK")
+        pass
     else:
         print("Erro: Codigo hexadecimal invalido!")
         sys.exit()
@@ -81,9 +81,9 @@ else:
     print("Erro: Vc deve digitar dois argumentos <tecnica codificacao> <valor hexa>")
     sys.exit()
 
-t = len(valorHexa)*4 #verifica total de bits
+t = len(valorHexa)*4 #completa total de bits
 convertBin = (bin(int(valorHexa, 16))[2:]).zfill(t)#Converte para binario
-print(convertBin)
+#print(convertBin)
 
 
 if(tecnica=="nrzi"):
