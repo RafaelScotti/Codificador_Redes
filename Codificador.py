@@ -93,6 +93,7 @@ def t8b10b(convertBin):
     print("\n"+saida8B10B)
     print(len(convertBin))
 
+#vou mudar sapoha toda
 def tabela5B6B(v56, rd):
     if(v56=="00000"):         #0
         return "100111" if rd=="-1" else "011000"
