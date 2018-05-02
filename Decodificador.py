@@ -21,8 +21,7 @@ def decodeNRZI(sinais):
                 primeiroSinal="+"
             else:
                 primeiroSinal="-"
-
-    print(convert(saidaNRZI))
+    return saidaNRZI
 
 
 def decodeMANCH(sinais):
@@ -40,9 +39,9 @@ def decodeMANCH(sinais):
                 erro(saidaMANCH)
         cont+=2
     if(len(sinais) % 2 == 0 and sinais!=""):
-        print(convert(saidaMANCH))
+        return saidaMANCH
     else:
-        print("Numero de sinais incorreto")
+        print ("Numero de sinais incorreto")
         erro(saidaMANCH)
 
 
@@ -95,7 +94,7 @@ def decodeMLT3(sinais):
             erro(saidaMLT3)
             print("sinal invalido")
             #sys.exit()
-    print(convert(saidaMLT3))
+    return saidaMLT3
 
 #Exibe erro
 def erro(variavel):
@@ -106,6 +105,9 @@ def erro(variavel):
         print("0 \nErro")
         sys.exit()
 
+def decode8B10B(sinais):
+    cBin = decodeNRZI(sinais)
+    print(cBin)
 
 #Variaveis usadas
 tecnica = ""
@@ -127,14 +129,13 @@ else:
     sys.exit()
 
 if(tecnica=="nrzi"):
-    decodeNRZI(sinais)
+    print(convert(decodeNRZI(sinais)))
 elif(tecnica=="manch"):
-    decodeMANCH(sinais)
+    print(convert(decodeMANCH(sinais)))
 elif(tecnica=="mlt3"):
-    decodeMLT3(sinais)
+    print(convert(decodeMLT3(sinais)))
 elif(tecnica=="8b10b"):
-    print("workin' on")
-    #t8b10b(convertBin)
+    print(convert(decode8B10B(sinais)))
 else:
     print("Erro: Tecnica invalida")
     sys.exit()
