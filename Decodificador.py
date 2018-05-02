@@ -117,8 +117,8 @@ def decode8B10B(sinais):
     while(cont<len(vBin)):
         bits = ""
         contBits = 0
-        while(contBits<8):
-            bits+=sinais[cont]
+        while(contBits<10):
+            bits+=vBin[cont]
             cont+=1
             contBits+=1
         #print(bits)
@@ -126,7 +126,8 @@ def decode8B10B(sinais):
         if(rd=="-1"):
             rd="+1"
         else:
-            rd="-1"    
+            rd="-1"   
+    return(saida8B10B)
     
 
 
@@ -136,39 +137,96 @@ def tabela8B10B(bitsSinais, rd):
     #print("."+v56+".")
     saida = ""
 
+    #tabela 3b4b
+    if((v34=="1011" and rd=="-1")or(v34=="0100" and rd=="+1")):
+        saida="000"     #0
+    elif(v34=="1001"):
+        saida="001"     #1
+    elif(v34=="0101"):
+        saida="010"     #2
+    elif((v34=="1100" and rd=="-1")or(v34=="0011" and rd=="+1")):
+        saida="011"     #3
+    elif((v34=="1101" and rd=="-1")or(v34=="0010" and rd=="+1")):
+        saida="100"     #4
+    elif(v34=="1010"):
+        saida="101"     #5
+    elif(v34=="0110"):
+        saida="110"     #6
+    elif((v34=="1110" and rd=="-1")or(v34=="0001" and rd=="+1")):
+        saida="111"     #D.x.P7
+    elif((v34=="0111" and rd=="-1")or(v34=="1000" and rd=="+1")):
+        saida="111"     #D.x.A7
+   
+
+    #tabela 5b6b
     if((v56=="100111" and rd=="-1") or (v56=="011000" and rd=="+1")):
-        saida="00000"   #0
+        saida+="00000"   #0
     elif((v56=="011101" and rd=="-1") or (v56=="100010" and rd=="+1")):
-        saida="00001"   #1
+        saida+="00001"   #1
     elif((v56=="101101" and rd=="-1") or (v56=="010010" and rd=="+1")):
-        saida="00010"   #2
+        saida+="00010"   #2
     elif(v56=="110001"):
-        saida="00011"   #3
+        saida+="00011"   #3
     elif((v56=="110101" and rd=="-1") or (v56=="001010" and rd=="+1")):
-        saida="00100"   #4
+        saida+="00100"   #4
     elif(v56=="101001"):
-        saida="00101"   #5
+        saida+="00101"   #5
     elif(v56=="011001"):
-        saida="00110"   #6
+        saida+="00110"   #6
     elif((v56=="111000" and rd=="-1") or (v56=="000111" and rd=="+1")):
-        saida="00111"   #7
+        saida+="00111"   #7
     elif((v56=="111001" and rd=="-1") or (v56=="000110" and rd=="+1")):
-        saida="01000"   #8
+        saida+="01000"   #8
     elif(v56=="100101"):
-        saida="01001"   #9
+        saida+="01001"   #9
     elif(v56=="010101"):
-        saida="01010"   #10
+        saida+="01010"   #10
     elif(v56=="110100"):
-        saida="01011"   #11
+        saida+="01011"   #11
     elif(v56=="001101"):
-        saida="01100"   #12
+        saida+="01100"   #12
     elif(v56=="101100"):
-        saida="01101"   #13
+        saida+="01101"   #13
     elif(v56=="011100"):
-        saida="01110"   #14
+        saida+="01110"   #14
     elif((v56=="010111" and rd=="-1") or (v56=="101000" and rd=="+1")):
-        saida="01111"   #15
-    
+        saida+="01111"   #15
+    elif((v56=="011011" and rd=="-1") or (v56=="100100" and rd=="+1")):
+        saida+="10000"   #16
+    elif(v56=="100011"):
+        saida+="10001"   #17
+    elif(v56=="010011"):
+        saida+="10010"   #18
+    elif(v56=="110010"):
+        saida+="10011"   #19
+    elif(v56=="001011"):
+        saida+="10100"   #20
+    elif(v56=="101010"):
+        saida+="10101"   #21
+    elif(v56=="011010"):
+        saida+="10110"   #22
+    elif((v56=="111010" and rd=="-1") or (v56=="000101" and rd=="+1")):
+        saida+="10111"   #23
+    elif((v56=="110011" and rd=="-1") or (v56=="001100" and rd=="+1")):
+        saida+="11000"   #24
+    elif(v56=="100110"):
+        saida+="11001"   #25
+    elif(v56=="010110"):
+        saida+="11010"   #26
+    elif((v56=="110110" and rd=="-1") or (v56=="001001" and rd=="+1")):
+        saida+="11011"   #27
+    elif(v56=="001110"):
+        saida+="11100"   #28
+    elif((v56=="101110" and rd=="-1") or (v56=="010001" and rd=="+1")):
+        saida+="11101"   #29
+    elif((v56=="011110" and rd=="-1") or (v56=="100001" and rd=="+1")):
+        saida+="11110"   #30
+    elif((v56=="101011" and rd=="-1") or (v56=="010100" and rd=="+1")):
+        saida+="11111"   #31
+    else:
+        return "Erro"
+
+    return saida
 
 
 #Variaveis usadas
