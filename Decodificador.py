@@ -106,8 +106,70 @@ def erro(variavel):
         sys.exit()
 
 def decode8B10B(sinais):
-    cBin = decodeNRZI(sinais)
-    print(cBin)
+    vBin = decodeNRZI(sinais)
+    
+    if((len(sinais)%10)!=0):
+        return "Erro! numero de sinais invalido"
+    #print(convertBin)
+    rd = "-1"    
+    saida8B10B = ""
+    cont = 0
+    while(cont<len(vBin)):
+        bits = ""
+        contBits = 0
+        while(contBits<8):
+            bits+=sinais[cont]
+            cont+=1
+            contBits+=1
+        #print(bits)
+        saida8B10B+=tabela8B10B(bits, rd)
+        if(rd=="-1"):
+            rd="+1"
+        else:
+            rd="-1"    
+    
+
+
+def tabela8B10B(bitsSinais, rd):
+    v34 = bitsSinais[6:10]
+    v56 = bitsSinais[0:6]
+    #print("."+v56+".")
+    saida = ""
+
+    if((v56=="100111" and rd=="-1") or (v56=="011000" and rd=="+1")):
+        saida="00000"   #0
+    elif((v56=="011101" and rd=="-1") or (v56=="100010" and rd=="+1")):
+        saida="00001"   #1
+    elif((v56=="101101" and rd=="-1") or (v56=="010010" and rd=="+1")):
+        saida="00010"   #2
+    elif(v56=="110001"):
+        saida="00011"   #3
+    elif((v56=="110101" and rd=="-1") or (v56=="001010" and rd=="+1")):
+        saida="00100"   #4
+    elif(v56=="101001"):
+        saida="00101"   #5
+    elif(v56=="011001"):
+        saida="00110"   #6
+    elif((v56=="111000" and rd=="-1") or (v56=="000111" and rd=="+1")):
+        saida="00111"   #7
+    elif((v56=="111001" and rd=="-1") or (v56=="000110" and rd=="+1")):
+        saida="01000"   #8
+    elif(v56=="100101"):
+        saida="01001"   #9
+    elif(v56=="010101"):
+        saida="01010"   #10
+    elif(v56=="110100"):
+        saida="01011"   #11
+    elif(v56=="001101"):
+        saida="01100"   #12
+    elif(v56=="101100"):
+        saida="01101"   #13
+    elif(v56=="011100"):
+        saida="01110"   #14
+    elif((v56=="010111" and rd=="-1") or (v56=="101000" and rd=="+1")):
+        saida="01111"   #15
+    
+
 
 #Variaveis usadas
 tecnica = ""

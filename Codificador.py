@@ -79,7 +79,7 @@ def encode8B10B(convertBin):
             contBits+=1
         #cont+=1
         #print(bits)
-        saida8B10B+=tabela8B10B(bits, rd)+" "
+        saida8B10B+=tabela8B10B(bits, rd)
         if(rd=="-1"):
             rd="+1"
         else:
