@@ -149,7 +149,7 @@ def tabela8B10B(bits, rd):
         saida = "010110"
     elif(v56=="11011"):         #27
         saida = "110110" if rd=="-1" else "001001"
-    elif(v56=="11100	"):         #28
+    elif(v56=="11100"):         #28
         saida = "001110"
     elif(v56=="11101"):         #29
         saida = "101110" if rd=="-1" else "010001"
