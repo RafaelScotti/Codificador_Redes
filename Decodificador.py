@@ -3,8 +3,8 @@ import string
 
 
 #Conversor para Hexadecimal
-def convert(binSring):
-    return hex(int(binSring, 2))[2:]
+def convert(binString):
+    return hex(int(binString, 2))[2:]
 
 
 #Decodificador NRZ-I
@@ -50,6 +50,7 @@ def decodeMLT3(sinais):
     saidaMLT3 = ""
     us = "0"    #us - ultimo sinal
     sa = "-"    #sa - sinal anterior
+    
     for n in sinais:
         if(n=="0"):
             if(us=="0"):
@@ -95,6 +96,7 @@ def decodeMLT3(sinais):
             erro(saidaMLT3)
             print("sinal invalido")
             #sys.exit()
+
     return saidaMLT3
 
 #Exibe erro

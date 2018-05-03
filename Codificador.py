@@ -237,3 +237,4 @@ elif(tecnica=="8b10b"):
 else:
     print("Erro: Tecnica invalida")
     sys.exit()
+    
