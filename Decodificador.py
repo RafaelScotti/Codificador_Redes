@@ -1,6 +1,7 @@
 import sys
 import string
 
+#OBS: os bits estão sendo lidos da esquerda pra direita
 
 #Conversor para Hexadecimal
 def convert(binString):
@@ -272,9 +273,3 @@ elif(tecnica=="8b10b"):
 else:
     print("Erro: Tecnica invalida")
     sys.exit()
-
-
-#decodeNRZI(sinais)
-#decodeMANCH(sinais)
-#decodeMLT3(sinais)
-#decodeT8B10B(sinais)
