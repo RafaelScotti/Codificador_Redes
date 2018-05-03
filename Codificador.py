@@ -14,51 +14,50 @@ def encodeNRZI(convertBin):
             else:
                 saidaNRZI = saidaNRZI + "+"
                 lastSinal="+"
-
         elif(n=="0"):
             saidaNRZI = saidaNRZI + lastSinal
 
     print(saidaNRZI)
 
+
 #FUNCAO MANCH
 def encodeMANCH(convertBin):
-    saidaMANCH=""
-    if(tecnica=="manch"):
-        for n in convertBin:
-            if(n=="1"):
-                saidaMANCH = saidaMANCH + "-+"
-            elif(n=="0"):
-                saidaMANCH = saidaMANCH + "+-"
-            #saidaMANCH +="
+    saidaMANCH=""  #resultado da funcao  
+    for n in convertBin:
+        if(n=="1"):
+            saidaMANCH = saidaMANCH + "-+"
+        elif(n=="0"):
+            saidaMANCH = saidaMANCH + "+-"
+         #saidaMANCH +="
 
     print(saidaMANCH)
 
+
 #FUNCAO MLT3
 def encodeMLT3(convertBin):
-    saidaMLT3=""
-    ultimoSinal="0"
+    saidaMLT3="" #resultado da funcao
+    ultimoSinal="0"     #controle do ultimo e do penultimo sinal de troca
     penultimoSinal="-"
-    if(tecnica=="mlt3"):
-        for n in convertBin:
-            if(n=="1" and penultimoSinal=="-" and ultimoSinal=="0"):
+    for n in convertBin:
+        if(n=="1" and penultimoSinal=="-" and ultimoSinal=="0"):
                 saidaMLT3=saidaMLT3 + "+"
                 penultimoSinal = ultimoSinal
                 ultimoSinal="+"
-            elif(n=="1" and penultimoSinal=="0" and ultimoSinal=="+"):
+        elif(n=="1" and penultimoSinal=="0" and ultimoSinal=="+"):
                 saidaMLT3  += "0"
                 penultimoSinal = ultimoSinal
                 ultimoSinal = "0"
-            elif(n=="1" and penultimoSinal=="0" and ultimoSinal=="-"):
+        elif(n=="1" and penultimoSinal=="0" and ultimoSinal=="-"):
                 saidaMLT3+="0"
                 penultimoSinal = ultimoSinal
                 ultimoSinal = "0"
-            elif(n=="1" and penultimoSinal=="+" and ultimoSinal=="0"):
+        elif(n=="1" and penultimoSinal=="+" and ultimoSinal=="0"):
                 saidaMLT3+="-"
                 penultimoSinal = ultimoSinal
                 ultimoSinal="-"
-            elif(n=="0"):
+        elif(n=="0"):
                 saidaMLT3+=ultimoSinal
-            #saidaMLT3+=" "
+                                   
     print(saidaMLT3)
 
 
@@ -85,6 +84,7 @@ def encode8B10B(convertBin):
         else:
             rd="-1"    
     encodeNRZI(saida8B10B)
+
 
 def tabela8B10B(bits, rd):
     v34 = bits[0:3]
@@ -160,7 +160,6 @@ def tabela8B10B(bits, rd):
     else:
         return "\nErro: Valores invalidos"
     
-
     #tabela 3b4b
     if(v34=="000"):             #0
         saida += "1011" if rd=="-1" else "0100"
@@ -203,7 +202,6 @@ def tabela8B10B(bits, rd):
     return saida
 
 
-
 #===main===
 #variaveis utilizadas
 tecnica = ""
@@ -221,7 +219,9 @@ else:
     print("Erro: Vc deve digitar dois argumentos <tecnica codificacao> <valor hexa>")
     sys.exit()
 
-t = len(valorHexa)*4 #completa total de bits
+
+#completa total de bits com 0
+t = len(valorHexa)*4 
 convertBin = (bin(int(valorHexa, 16))[2:]).zfill(t)#Converte para binario
 #print(convertBin)
 

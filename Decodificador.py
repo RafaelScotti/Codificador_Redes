@@ -2,13 +2,12 @@ import sys
 import string
 
 
-#sinais = "---+++----+--+++"
-#sinais = "+++000-0"
-#tecnica = "mlt3"
-
+#Conversor para Hexadecimal
 def convert(binSring):
     return hex(int(binSring, 2))[2:]
 
+
+#Decodificador NRZ-I
 def decodeNRZI(sinais):
     saidaNRZI = ""
     primeiroSinal = "-"
@@ -24,6 +23,7 @@ def decodeNRZI(sinais):
     return saidaNRZI
 
 
+#Decodificador Manchester
 def decodeMANCH(sinais):
     saidaMANCH = ""
     cont = 0
@@ -45,10 +45,11 @@ def decodeMANCH(sinais):
         erro(saidaMANCH)
 
 
+#Decodificador MLT-3
 def decodeMLT3(sinais):
     saidaMLT3 = ""
-    us = "0"
-    sa = "-"
+    us = "0"    #us - ultimo sinal
+    sa = "-"    #sa - sinal anterior
     for n in sinais:
         if(n=="0"):
             if(us=="0"):
@@ -105,8 +106,10 @@ def erro(variavel):
         print("0 \nErro")
         sys.exit()
 
+
+#Decodificador 8B/10B
 def decode8B10B(sinais):
-    vBin = decodeNRZI(sinais)
+    vBin = decodeNRZI(sinais) #decodifica com nrzi (variavel vBin - valorBinario)
     #print(vBin)
     rd = "-1"    
     saida8B10B = ""
@@ -114,6 +117,7 @@ def decode8B10B(sinais):
     if(len(vBin)<10):
         print("São necessarios pelo menos 10bits para completar a operação")
         sys.exit()
+
     while(cont<len(vBin)):
         bits = ""
         contBits = 0
@@ -129,8 +133,7 @@ def decode8B10B(sinais):
             rd="-1"   
     return(saida8B10B)
     
-
-
+#tabela de decodificação 8B/10B
 def tabela8B10B(bits, rd):
     v34 = bits[6:10]
     v56 = bits[0:6]
@@ -238,10 +241,9 @@ def tabela8B10B(bits, rd):
     return saida
 
 
-#Variaveis usadas
+#argumentos
 tecnica = ""
 sinais  = ""
-
 
 #Verifica os argumentos passados
 if(len(sys.argv)==3):
@@ -254,7 +256,7 @@ if(len(sys.argv)==3):
             print("'"+ n + "' nao e um sinal valido")
             sys.exit()
 else:
-    print("Erro: Vc deve digitar dois argumentos <tecnica codificacao> <valor hexa>")
+    print("Erro: Vc deve digitar dois argumentos <tecnica decodificacao> <sinais>")
     sys.exit()
 
 if(tecnica=="nrzi"):
